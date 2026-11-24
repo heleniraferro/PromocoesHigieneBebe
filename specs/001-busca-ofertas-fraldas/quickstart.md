@@ -11,17 +11,17 @@
 ```bash
 cp deploy/.env.example deploy/.env           # preencher senhas locais
 docker compose -f deploy/docker-compose.yml up -d postgres
-dotnet ef database update -p src/FraldasPromo.Infrastructure -s src/FraldasPromo.Web
-pwsh src/FraldasPromo.Worker/bin/Debug/net10.0/playwright.ps1 install chromium
-dotnet run --project src/FraldasPromo.Worker   # agenda e executa as coletas
-dotnet run --project src/FraldasPromo.Web      # https://localhost:5001
+dotnet ef database update -p src/PromocoesHigieneBebe.Infrastructure -s src/PromocoesHigieneBebe.Web
+pwsh src/PromocoesHigieneBebe.Worker/bin/Debug/net10.0/playwright.ps1 install chromium
+dotnet run --project src/PromocoesHigieneBebe.Worker   # agenda e executa as coletas
+dotnet run --project src/PromocoesHigieneBebe.Web      # https://localhost:5001
 ```
 
 ## Roteiro de validação (por história)
 
 | História | Passo | Resultado esperado |
 | --- | --- | --- |
-| US1 | `dotnet test tests/FraldasPromo.Infrastructure.Tests --filter Coleta` | Fixtures das 4 drogarias interpretadas; descartes com motivo |
+| US1 | `dotnet test tests/PromocoesHigieneBebe.Infrastructure.Tests --filter Coleta` | Fixtures das 4 drogarias interpretadas; descartes com motivo |
 | US1 | Disparar a coleta da Pague Menos pelo painel do Hangfire (só em desenvolvimento) | Registro em `ofertas.coletas` com situação `Concluida` e contagens |
 | US2 | Abrir `/`, escolher G | Lista única ordenada por preço por fralda; primeira com "Mais barato" |
 | US2 | Conferir 10 ofertas, incluindo 3 kits, contra a calculadora | Valores iguais (SC-004) |

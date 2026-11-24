@@ -1,4 +1,4 @@
-# Constituição do FraldasPromo
+# Constituição do PromocoesHigieneBebe
 
 **Versão:** 1.0.0 · **Ratificada em:** 2026-11-24 · **Última alteração:** 2026-11-24
 
@@ -30,7 +30,7 @@ Esta constituição define as regras que não se negociam no projeto. Toda spec,
 2. `Application` define portas (interfaces) e `Infrastructure` implementa adaptadores (coletores, repositórios, relógio).
 3. Casos de uso são classes pequenas, uma por intenção (`ColetarOfertasHandler`, `BuscarOfertasHandler`), chamadas diretamente por injeção de dependência. **Sem MediatR e sem AutoMapper**: o mapeamento é explícito e manual.
 4. Leitura e escrita podem seguir caminhos diferentes (CQRS leve): consultas de tela usam projeções diretas para DTOs de leitura, sem carregar agregados.
-5. As regras são verificadas por testes de arquitetura (`FraldasPromo.ArchitectureTests`) no CI.
+5. As regras são verificadas por testes de arquitetura (`PromocoesHigieneBebe.ArchitectureTests`) no CI.
 
 ## Artigo IV — Clean Code e convenções C#
 

@@ -42,19 +42,19 @@ Monólito modular em .NET 10 com dois hosts. O `Worker` coleta as ofertas das 4 
 ## Estrutura do repositório
 
 ```text
-FraldasPromo/
+PromocoesHigieneBebe/
 ├── .specify/memory/constitution.md
 ├── specs/001-busca-ofertas-fraldas/
 │   ├── spec.md · plan.md · research.md · data-model.md · quickstart.md · tasks.md
 │   └── contracts/
 ├── src/
-│   ├── FraldasPromo.Domain/
+│   ├── PromocoesHigieneBebe.Domain/
 │   │   ├── Compartilhado/            # Entity, AggregateRoot, ValueObject, Result, Error, IDomainEvent
 │   │   ├── Ofertas/                  # Drogaria, Tamanho, Dinheiro, Embalagem, PrecoPorUnidade, Marca, Linha,
 │   │   │                             # UrlDeProduto, Sku, CondicaoComercial, Produto, Cotacao, Coleta,
 │   │   │                             # InterpretadorDeDescricao, MotivoDescarte, eventos
 │   │   └── Preferencias/             # PreferenciaDeBusca, FiltroTipo
-│   ├── FraldasPromo.Application/
+│   ├── PromocoesHigieneBebe.Application/
 │   │   ├── Abstractions/             # IColetorDeOfertas, IProdutoRepository, ICotacaoRepository,
 │   │   │                             # IColetaRepository, IConsultaDeOfertas, IUnitOfWork
 │   │   ├── Ofertas/Coletar/          # ColetarOfertasCommand, ColetarOfertasHandler
@@ -62,25 +62,25 @@ FraldasPromo/
 │   │   ├── Ofertas/Situacao/         # ObterSituacaoDasDrogariasHandler
 │   │   ├── Preferencias/             # ObterPreferenciaHandler, SalvarPreferenciaHandler
 │   │   └── DependencyInjection.cs
-│   ├── FraldasPromo.Infrastructure/
+│   ├── PromocoesHigieneBebe.Infrastructure/
 │   │   ├── Persistencia/             # FraldasDbContext, Configurations/, Migrations/, Repositories/, ConsultaDeOfertas
 │   │   ├── Coleta/Vtex/              # VtexColetor, VtexOptions, modelos JSON
 │   │   ├── Coleta/Drogasil/          # DrogasilColetor (Playwright), modelos JSON
 │   │   ├── Coleta/Configuracao/      # MarcasConhecidas, MarcasProprias, limites
 │   │   └── DependencyInjection.cs
-│   ├── FraldasPromo.Web/             # Razor Pages, Identity, HTMX, PWA, cabeçalhos de segurança
-│   └── FraldasPromo.Worker/          # Host do Hangfire, jobs recorrentes por drogaria
+│   ├── PromocoesHigieneBebe.Web/             # Razor Pages, Identity, HTMX, PWA, cabeçalhos de segurança
+│   └── PromocoesHigieneBebe.Worker/          # Host do Hangfire, jobs recorrentes por drogaria
 ├── tests/
-│   ├── FraldasPromo.Domain.Tests/
-│   ├── FraldasPromo.Application.Tests/
-│   ├── FraldasPromo.Infrastructure.Tests/   # Testcontainers + Fixtures/ (respostas gravadas)
-│   ├── FraldasPromo.Web.Tests/              # WebApplicationFactory
-│   └── FraldasPromo.ArchitectureTests/      # NetArchTest
-├── tools/FraldasPromo.Spike/          # Fase 0: console app de teste de coleta (descartável)
+│   ├── PromocoesHigieneBebe.Domain.Tests/
+│   ├── PromocoesHigieneBebe.Application.Tests/
+│   ├── PromocoesHigieneBebe.Infrastructure.Tests/   # Testcontainers + Fixtures/ (respostas gravadas)
+│   ├── PromocoesHigieneBebe.Web.Tests/              # WebApplicationFactory
+│   └── PromocoesHigieneBebe.ArchitectureTests/      # NetArchTest
+├── tools/PromocoesHigieneBebe.Spike/          # Fase 0: console app de teste de coleta (descartável)
 ├── deploy/                            # docker-compose.yml, Caddyfile, .env.example
 ├── .github/workflows/ci.yml
 ├── .editorconfig · Directory.Build.props · Directory.Packages.props · global.json
-├── FraldasPromo.slnx
+├── PromocoesHigieneBebe.slnx
 └── CLAUDE.md · README.md
 ```
 

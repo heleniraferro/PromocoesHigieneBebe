@@ -1,4 +1,4 @@
-# FraldasPromo
+# PromocoesHigieneBebe
 
 Comparador de preços de fraldas nas drogarias Drogasil, Drogaria São Paulo, Drogaria Rosário e Pague Menos, ordenado por **preço por unidade**.
 

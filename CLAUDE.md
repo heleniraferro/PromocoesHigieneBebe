@@ -1,4 +1,4 @@
-# CLAUDE.md — FraldasPromo
+# CLAUDE.md — PromocoesHigieneBebe
 
 Comparador pessoal de preços de fraldas (e, no futuro, lenço umedecido e pomada antiassadura) nas drogarias **Drogasil, Drogaria São Paulo, Drogaria Rosário e Pague Menos**, ordenado por **preço por unidade**.
 
@@ -26,7 +26,7 @@ Feature ativa: **`specs/001-busca-ofertas-fraldas`**
 ```bash
 dotnet build -warnaserror                 # build sem avisos
 dotnet test                               # todos os testes
-dotnet test tests/FraldasPromo.Domain.Tests
+dotnet test tests/PromocoesHigieneBebe.Domain.Tests
 dotnet format --verify-no-changes         # estilo
 dotnet list package --vulnerable          # dependências
 docker compose -f deploy/docker-compose.yml up -d   # ambiente local

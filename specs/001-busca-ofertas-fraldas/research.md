@@ -56,7 +56,7 @@ Cada decisão segue o formato: **Decisão**, **Por quê**, **Alternativas avalia
 
 - **Decisão:** xUnit v3, Shouldly, NSubstitute, Testcontainers para PostgreSQL, `WebApplicationFactory` para a Web e NetArchTest.Rules para regras de arquitetura.
 - **Por quê:** padrão do ecossistema .NET; Shouldly no lugar de FluentAssertions porque a versão 8 do FluentAssertions passou a ter licença comercial.
-- **Fixtures:** respostas reais gravadas na Fase 0 (JSON da VTEX, JSON/HTML da Drogasil), versionadas em `tests/FraldasPromo.Infrastructure.Tests/Fixtures`.
+- **Fixtures:** respostas reais gravadas na Fase 0 (JSON da VTEX, JSON/HTML da Drogasil), versionadas em `tests/PromocoesHigieneBebe.Infrastructure.Tests/Fixtures`.
 
 ## R9. Sem MediatR e sem AutoMapper
 

@@ -1,6 +1,6 @@
 # Contrato: porta de coleta (`IColetorDeOfertas`)
 
-Porta definida em `FraldasPromo.Application/Abstractions`. Cada drogaria tem um adaptador em `FraldasPromo.Infrastructure/Coleta`.
+Porta definida em `PromocoesHigieneBebe.Application/Abstractions`. Cada drogaria tem um adaptador em `PromocoesHigieneBebe.Infrastructure/Coleta`.
 
 ```csharp
 public interface IColetorDeOfertas
