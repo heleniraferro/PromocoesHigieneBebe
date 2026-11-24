@@ -13,11 +13,11 @@
 
 ## Fase 0: Viabilidade (bloqueia a História 1)
 
-- [ ] T001 Criar console app de spike que consulta a Intelligent Search v1 e a legada nas lojas VTEX (Drogaria São Paulo, Rosário, Pague Menos) com o termo "fralda G" e salva as respostas JSON — `tools/FraldasPromo.Spike/`
-- [ ] T002 No spike, abrir a busca da Drogasil com Playwright, listar as requisições de rede e salvar a resposta que traz os preços — `tools/FraldasPromo.Spike/`
-- [ ] T003 Testar a regionalização com um CEP de Cuiabá nas lojas VTEX e na Drogasil e registrar como funciona — `tools/FraldasPromo.Spike/NOTAS.md`
-- [ ] T004 Gravar 2 a 3 respostas por drogaria como fixtures — `tests/FraldasPromo.Infrastructure.Tests/Fixtures/<drogaria>/`
-- [ ] T005 Montar o arquivo com 50 descrições reais e o tamanho, tipo, unidades e pacotes esperados de cada uma — `tests/FraldasPromo.Domain.Tests/Fixtures/descricoes.csv`
+- [ ] T001 Criar console app de spike que consulta a Intelligent Search v1 e a legada nas lojas VTEX (Drogaria São Paulo, Rosário, Pague Menos) com o termo "fralda G" e salva as respostas JSON — `tools/PromocoesHigieneBebe.Spike/`
+- [ ] T002 No spike, abrir a busca da Drogasil com Playwright, listar as requisições de rede e salvar a resposta que traz os preços — `tools/PromocoesHigieneBebe.Spike/`
+- [ ] T003 Testar a regionalização com um CEP de Cuiabá nas lojas VTEX e na Drogasil e registrar como funciona — `tools/PromocoesHigieneBebe.Spike/RELATORIO.md`
+- [ ] T004 Gravar 2 a 3 respostas por drogaria como fixtures — `tests/PromocoesHigieneBebe.Infrastructure.Tests/Fixtures/<drogaria>/`
+- [ ] T005 Montar o arquivo com 50 descrições reais e o tamanho, tipo, unidades e pacotes esperados de cada uma — `tests/PromocoesHigieneBebe.Domain.Tests/Fixtures/descricoes.csv`
 - [ ] T006 Atualizar `research.md` (R2, R3) e `contracts/vtex-intelligent-search.md` com o que foi confirmado e remover as marcações "a validar"
 
 **Ponto de controle:** se alguma drogaria não puder ser coletada sem violar o Artigo VII, atualizar a spec antes de seguir.
@@ -26,7 +26,7 @@
 
 ## Fase 1: Setup
 
-- [ ] T007 Criar a solução e os projetos conforme o plano — `FraldasPromo.slnx`, `src/*`, `tests/*`
+- [ ] T007 Criar a solução e os projetos conforme o plano — `PromocoesHigieneBebe.slnx`, `src/*`, `tests/*`
 - [ ] T008 [P] Configurar `Directory.Build.props`: `net10.0`, `Nullable`, `ImplicitUsings`, `TreatWarningsAsErrors`, `AnalysisLevel=latest-recommended`
 - [ ] T009 [P] Configurar gerenciamento central de pacotes — `Directory.Packages.props`
 - [ ] T010 [P] Criar `.editorconfig` com as convenções C# (namespace por arquivo, `var` quando o tipo é evidente, nomes, ordem de usings)
@@ -39,12 +39,12 @@
 
 ## Fase 2: Fundação (bloqueia todas as histórias)
 
-- [ ] T015 [P] Testes de arquitetura: `Domain` sem dependências; `Application` só depende de `Domain`; nenhum tipo de `Infrastructure` em `Application` — `tests/FraldasPromo.ArchitectureTests/DependenciasTests.cs`
-- [ ] T016 [P] Testes de `Result` e `Error` — `tests/FraldasPromo.Domain.Tests/Compartilhado/ResultTests.cs`
-- [ ] T017 Implementar `Result`, `Result<T>` e `Error` — `src/FraldasPromo.Domain/Compartilhado/`
-- [ ] T018 [P] Implementar `Entity<TId>`, `AggregateRoot<TId>` (lista de eventos), `ValueObject` e `IDomainEvent` — `src/FraldasPromo.Domain/Compartilhado/`
-- [ ] T019 Criar `FraldasDbContext` com schemas `ofertas` e `preferencias` e nomes em snake_case — `src/FraldasPromo.Infrastructure/Persistencia/`
-- [ ] T020 [P] Fixture do Testcontainers com PostgreSQL e aplicação das migrations — `tests/FraldasPromo.Infrastructure.Tests/PostgresFixture.cs`
+- [ ] T015 [P] Testes de arquitetura: `Domain` sem dependências; `Application` só depende de `Domain`; nenhum tipo de `Infrastructure` em `Application` — `tests/PromocoesHigieneBebe.ArchitectureTests/DependenciasTests.cs`
+- [ ] T016 [P] Testes de `Result` e `Error` — `tests/PromocoesHigieneBebe.Domain.Tests/Compartilhado/ResultTests.cs`
+- [ ] T017 Implementar `Result`, `Result<T>` e `Error` — `src/PromocoesHigieneBebe.Domain/Compartilhado/`
+- [ ] T018 [P] Implementar `Entity<TId>`, `AggregateRoot<TId>` (lista de eventos), `ValueObject` e `IDomainEvent` — `src/PromocoesHigieneBebe.Domain/Compartilhado/`
+- [ ] T019 Criar `FraldasDbContext` com schemas `ofertas` e `preferencias` e nomes em snake_case — `src/PromocoesHigieneBebe.Infrastructure/Persistencia/`
+- [ ] T020 [P] Fixture do Testcontainers com PostgreSQL e aplicação das migrations — `tests/PromocoesHigieneBebe.Infrastructure.Tests/PostgresFixture.cs`
 - [ ] T021 Registrar dependências de `Application` e `Infrastructure` e `TimeProvider.System` — `*/DependencyInjection.cs`
 
 **Ponto de controle:** build sem avisos, CI verde, testes de arquitetura passando.
@@ -58,37 +58,37 @@
 
 ### Testes (escrever primeiro)
 
-- [ ] T022 [P] [US1] Testes de `Tamanho`: interpretação, sinônimos (`EG`, `EXG`, `RN Plus`), nenhum ou dois tamanhos — `tests/FraldasPromo.Domain.Tests/Ofertas/TamanhoTests.cs`
-- [ ] T023 [P] [US1] Testes de `Dinheiro`, `Embalagem` e `PrecoPorUnidade` (kit 3 × 60 por R$ 180,00 = R$ 1,00; faixa plausível) — `tests/FraldasPromo.Domain.Tests/Ofertas/ObjetosDeValorTests.cs`
-- [ ] T024 [P] [US1] Testes de `UrlDeProduto`: aceita o domínio da drogaria; rejeita outro host e `http` — `tests/FraldasPromo.Domain.Tests/Ofertas/UrlDeProdutoTests.cs`
-- [ ] T025 [P] [US1] Testes de `Marca` e `Linha`: normalização e marcas próprias — `tests/FraldasPromo.Domain.Tests/Ofertas/MarcaTests.cs`
-- [ ] T026 [P] [US1] Testes do `InterpretadorDeDescricao` com os cenários da spec e o `descricoes.csv` (≥ 95% corretos, nenhum errado) — `tests/FraldasPromo.Domain.Tests/Ofertas/InterpretadorDeDescricaoTests.cs`
-- [ ] T027 [P] [US1] Testes dos agregados `Produto`, `Cotacao` e `Coleta` (invariantes e transições de situação) — `tests/FraldasPromo.Domain.Tests/Ofertas/AgregadosTests.cs`
+- [ ] T022 [P] [US1] Testes de `Tamanho`: interpretação, sinônimos (`EG`, `EXG`, `RN Plus`), nenhum ou dois tamanhos — `tests/PromocoesHigieneBebe.Domain.Tests/Ofertas/TamanhoTests.cs`
+- [ ] T023 [P] [US1] Testes de `Dinheiro`, `Embalagem` e `PrecoPorUnidade` (kit 3 × 60 por R$ 180,00 = R$ 1,00; faixa plausível) — `tests/PromocoesHigieneBebe.Domain.Tests/Ofertas/ObjetosDeValorTests.cs`
+- [ ] T024 [P] [US1] Testes de `UrlDeProduto`: aceita o domínio da drogaria; rejeita outro host e `http` — `tests/PromocoesHigieneBebe.Domain.Tests/Ofertas/UrlDeProdutoTests.cs`
+- [ ] T025 [P] [US1] Testes de `Marca` e `Linha`: normalização e marcas próprias — `tests/PromocoesHigieneBebe.Domain.Tests/Ofertas/MarcaTests.cs`
+- [ ] T026 [P] [US1] Testes do `InterpretadorDeDescricao` com os cenários da spec e o `descricoes.csv` (≥ 95% corretos, nenhum errado) — `tests/PromocoesHigieneBebe.Domain.Tests/Ofertas/InterpretadorDeDescricaoTests.cs`
+- [ ] T027 [P] [US1] Testes dos agregados `Produto`, `Cotacao` e `Coleta` (invariantes e transições de situação) — `tests/PromocoesHigieneBebe.Domain.Tests/Ofertas/AgregadosTests.cs`
 
 ### Domínio
 
-- [ ] T028 [P] [US1] Enumerações inteligentes `Drogaria` e `Tamanho` — `src/FraldasPromo.Domain/Ofertas/`
-- [ ] T029 [P] [US1] Objetos de valor `Dinheiro`, `Embalagem`, `PrecoPorUnidade`, `Sku`, `Marca`, `Linha`, `CondicaoComercial`, `UrlDeProduto` — `src/FraldasPromo.Domain/Ofertas/`
-- [ ] T030 [US1] `InterpretadorDeDescricao` e `MotivoDescarte` (depende de T028 e T029) — `src/FraldasPromo.Domain/Ofertas/`
-- [ ] T031 [US1] Agregados `Produto`, `Cotacao` (evento `CotacaoRegistrada`) e `Coleta` — `src/FraldasPromo.Domain/Ofertas/`
+- [ ] T028 [P] [US1] Enumerações inteligentes `Drogaria` e `Tamanho` — `src/PromocoesHigieneBebe.Domain/Ofertas/`
+- [ ] T029 [P] [US1] Objetos de valor `Dinheiro`, `Embalagem`, `PrecoPorUnidade`, `Sku`, `Marca`, `Linha`, `CondicaoComercial`, `UrlDeProduto` — `src/PromocoesHigieneBebe.Domain/Ofertas/`
+- [ ] T030 [US1] `InterpretadorDeDescricao` e `MotivoDescarte` (depende de T028 e T029) — `src/PromocoesHigieneBebe.Domain/Ofertas/`
+- [ ] T031 [US1] Agregados `Produto`, `Cotacao` (evento `CotacaoRegistrada`) e `Coleta` — `src/PromocoesHigieneBebe.Domain/Ofertas/`
 
 ### Aplicação
 
-- [ ] T032 [US1] Portas `IColetorDeOfertas`, `OfertaBruta`, `IProdutoRepository`, `ICotacaoRepository`, `IColetaRepository`, `IUnitOfWork` e `ColetaBloqueadaException` — `src/FraldasPromo.Application/Abstractions/`
-- [ ] T033 [US1] Testes do `ColetarOfertasHandler` com dublês: aceite, descarte com motivo, duplicado, falha e bloqueio — `tests/FraldasPromo.Application.Tests/Ofertas/ColetarOfertasHandlerTests.cs`
-- [ ] T034 [US1] `ColetarOfertasCommand` e `ColetarOfertasHandler` — `src/FraldasPromo.Application/Ofertas/Coletar/`
+- [ ] T032 [US1] Portas `IColetorDeOfertas`, `OfertaBruta`, `IProdutoRepository`, `ICotacaoRepository`, `IColetaRepository`, `IUnitOfWork` e `ColetaBloqueadaException` — `src/PromocoesHigieneBebe.Application/Abstractions/`
+- [ ] T033 [US1] Testes do `ColetarOfertasHandler` com dublês: aceite, descarte com motivo, duplicado, falha e bloqueio — `tests/PromocoesHigieneBebe.Application.Tests/Ofertas/ColetarOfertasHandlerTests.cs`
+- [ ] T034 [US1] `ColetarOfertasCommand` e `ColetarOfertasHandler` — `src/PromocoesHigieneBebe.Application/Ofertas/Coletar/`
 
 ### Infraestrutura
 
-- [ ] T035 [P] [US1] Configurações EF de `Produto`, `Cotacao` e `Coleta` e migration inicial — `src/FraldasPromo.Infrastructure/Persistencia/Configurations/`
-- [ ] T036 [US1] Repositórios e unidade de trabalho, com testes de integração no PostgreSQL — `src/FraldasPromo.Infrastructure/Persistencia/Repositories/`, `tests/FraldasPromo.Infrastructure.Tests/Persistencia/`
-- [ ] T037 [P] [US1] Testes do `VtexColetor` com fixtures: paginação, produto com vários itens, URL relativa, 403 repetido vira bloqueio — `tests/FraldasPromo.Infrastructure.Tests/Coleta/VtexColetorTests.cs`
-- [ ] T038 [US1] `VtexColetor`, `VtexOptions` e políticas de resiliência — `src/FraldasPromo.Infrastructure/Coleta/Vtex/`
-- [ ] T039 [P] [US1] Testes do `DrogasilColetor` com páginas servidas localmente a partir das fixtures — `tests/FraldasPromo.Infrastructure.Tests/Coleta/DrogasilColetorTests.cs`
-- [ ] T040 [US1] `DrogasilColetor` com Playwright — `src/FraldasPromo.Infrastructure/Coleta/Drogasil/`
-- [ ] T041 [US1] Host `Worker` com Hangfire no PostgreSQL: um job diário por drogaria (cron no fuso de Cuiabá, com defasagem entre drogarias), `DisableConcurrentExecution` e `AutomaticRetry` — `src/FraldasPromo.Worker/`
-- [ ] T042 [US1] Dockerfile do worker sobre a imagem oficial do Playwright para .NET, com usuário não root — `src/FraldasPromo.Worker/Dockerfile`
-- [ ] T043 [US1] Teste de ponta a ponta: a coleta das 4 fixtures grava os produtos e cotações esperados — `tests/FraldasPromo.Infrastructure.Tests/Coleta/ColetaPontaAPontaTests.cs`
+- [ ] T035 [P] [US1] Configurações EF de `Produto`, `Cotacao` e `Coleta` e migration inicial — `src/PromocoesHigieneBebe.Infrastructure/Persistencia/Configurations/`
+- [ ] T036 [US1] Repositórios e unidade de trabalho, com testes de integração no PostgreSQL — `src/PromocoesHigieneBebe.Infrastructure/Persistencia/Repositories/`, `tests/PromocoesHigieneBebe.Infrastructure.Tests/Persistencia/`
+- [ ] T037 [P] [US1] Testes do `VtexColetor` com fixtures: paginação, produto com vários itens, URL relativa, 403 repetido vira bloqueio — `tests/PromocoesHigieneBebe.Infrastructure.Tests/Coleta/VtexColetorTests.cs`
+- [ ] T038 [US1] `VtexColetor`, `VtexOptions` e políticas de resiliência — `src/PromocoesHigieneBebe.Infrastructure/Coleta/Vtex/`
+- [ ] T039 [P] [US1] Testes do `DrogasilColetor` com páginas servidas localmente a partir das fixtures — `tests/PromocoesHigieneBebe.Infrastructure.Tests/Coleta/DrogasilColetorTests.cs`
+- [ ] T040 [US1] `DrogasilColetor` com Playwright — `src/PromocoesHigieneBebe.Infrastructure/Coleta/Drogasil/`
+- [ ] T041 [US1] Host `Worker` com Hangfire no PostgreSQL: um job diário por drogaria (cron no fuso de Cuiabá, com defasagem entre drogarias), `DisableConcurrentExecution` e `AutomaticRetry` — `src/PromocoesHigieneBebe.Worker/`
+- [ ] T042 [US1] Dockerfile do worker sobre a imagem oficial do Playwright para .NET, com usuário não root — `src/PromocoesHigieneBebe.Worker/Dockerfile`
+- [ ] T043 [US1] Teste de ponta a ponta: a coleta das 4 fixtures grava os produtos e cotações esperados — `tests/PromocoesHigieneBebe.Infrastructure.Tests/Coleta/ColetaPontaAPontaTests.cs`
 
 **Ponto de controle:** História 1 funciona e é testável sozinha.
 
@@ -99,13 +99,13 @@
 **Objetivo:** lista única ordenada por preço por fralda.
 **Teste independente:** com ofertas pré-cadastradas, `/ofertas?tamanho=G` devolve a lista correta.
 
-- [ ] T044 [P] [US2] Testes do `BuscarOfertasHandler`: validação, três ordenações e indisponíveis no fim — `tests/FraldasPromo.Application.Tests/Ofertas/BuscarOfertasHandlerTests.cs`
-- [ ] T045 [US2] `BuscarOfertasQuery`, `OfertaDto`, `Ordenacao`, `IConsultaDeOfertas` e `BuscarOfertasHandler` — `src/FraldasPromo.Application/Ofertas/Buscar/`
-- [ ] T046 [US2] View `ofertas.ofertas_atuais` (migration) e `ConsultaDeOfertas` com projeção, com testes de integração para "só o tamanho escolhido" (SC-005) e preço por unidade (SC-004) — `src/FraldasPromo.Infrastructure/Persistencia/`
-- [ ] T047 [US2] Projeto Web: layout, HTMX servido localmente, cabeçalhos de segurança e CSP — `src/FraldasPromo.Web/`
-- [ ] T048 [US2] Página inicial com chips de tamanho e fragmento `_ListaDeOfertas` na rota `/ofertas` — `src/FraldasPromo.Web/Pages/`
-- [ ] T049 [P] [US2] Testes da Web: lista ordenada, descrição com HTML malicioso sai codificada, links com `noopener` — `tests/FraldasPromo.Web.Tests/OfertasTests.cs`
-- [ ] T050 [US2] Manifest PWA e ícones — `src/FraldasPromo.Web/wwwroot/`
+- [ ] T044 [P] [US2] Testes do `BuscarOfertasHandler`: validação, três ordenações e indisponíveis no fim — `tests/PromocoesHigieneBebe.Application.Tests/Ofertas/BuscarOfertasHandlerTests.cs`
+- [ ] T045 [US2] `BuscarOfertasQuery`, `OfertaDto`, `Ordenacao`, `IConsultaDeOfertas` e `BuscarOfertasHandler` — `src/PromocoesHigieneBebe.Application/Ofertas/Buscar/`
+- [ ] T046 [US2] View `ofertas.ofertas_atuais` (migration) e `ConsultaDeOfertas` com projeção, com testes de integração para "só o tamanho escolhido" (SC-005) e preço por unidade (SC-004) — `src/PromocoesHigieneBebe.Infrastructure/Persistencia/`
+- [ ] T047 [US2] Projeto Web: layout, HTMX servido localmente, cabeçalhos de segurança e CSP — `src/PromocoesHigieneBebe.Web/`
+- [ ] T048 [US2] Página inicial com chips de tamanho e fragmento `_ListaDeOfertas` na rota `/ofertas` — `src/PromocoesHigieneBebe.Web/Pages/`
+- [ ] T049 [P] [US2] Testes da Web: lista ordenada, descrição com HTML malicioso sai codificada, links com `noopener` — `tests/PromocoesHigieneBebe.Web.Tests/OfertasTests.cs`
+- [ ] T050 [US2] Manifest PWA e ícones — `src/PromocoesHigieneBebe.Web/wwwroot/`
 
 **Ponto de controle:** Histórias 1 e 2 entregam o MVP mínimo localmente.
 
@@ -113,12 +113,12 @@
 
 ## Fase 5: História 3 — Filtros e preferências (P2)
 
-- [ ] T051 [P] [US3] Testes de `PreferenciaDeBusca`: padrão com todas as marcas e tipo "ambos"; marcas não podem ficar vazias — `tests/FraldasPromo.Domain.Tests/Preferencias/PreferenciaDeBuscaTests.cs`
-- [ ] T052 [US3] `PreferenciaDeBusca` e `FiltroTipo` — `src/FraldasPromo.Domain/Preferencias/`
-- [ ] T053 [P] [US3] Testes de `ObterPreferenciaHandler` e `SalvarPreferenciaHandler` — `tests/FraldasPromo.Application.Tests/Preferencias/`
-- [ ] T054 [US3] Handlers, repositório, configuração EF no schema `preferencias` e migration — `src/FraldasPromo.Application/Preferencias/`, `src/FraldasPromo.Infrastructure/Persistencia/`
-- [ ] T055 [US3] Filtros de marca, tipo e linha na tela; `POST /preferencias` via HTMX com antiforgery — `src/FraldasPromo.Web/Pages/`
-- [ ] T056 [P] [US3] Testes da Web: filtros aplicados, preferência restaurada e POST sem token devolve 400 — `tests/FraldasPromo.Web.Tests/PreferenciasTests.cs`
+- [ ] T051 [P] [US3] Testes de `PreferenciaDeBusca`: padrão com todas as marcas e tipo "ambos"; marcas não podem ficar vazias — `tests/PromocoesHigieneBebe.Domain.Tests/Preferencias/PreferenciaDeBuscaTests.cs`
+- [ ] T052 [US3] `PreferenciaDeBusca` e `FiltroTipo` — `src/PromocoesHigieneBebe.Domain/Preferencias/`
+- [ ] T053 [P] [US3] Testes de `ObterPreferenciaHandler` e `SalvarPreferenciaHandler` — `tests/PromocoesHigieneBebe.Application.Tests/Preferencias/`
+- [ ] T054 [US3] Handlers, repositório, configuração EF no schema `preferencias` e migration — `src/PromocoesHigieneBebe.Application/Preferencias/`, `src/PromocoesHigieneBebe.Infrastructure/Persistencia/`
+- [ ] T055 [US3] Filtros de marca, tipo e linha na tela; `POST /preferencias` via HTMX com antiforgery — `src/PromocoesHigieneBebe.Web/Pages/`
+- [ ] T056 [P] [US3] Testes da Web: filtros aplicados, preferência restaurada e POST sem token devolve 400 — `tests/PromocoesHigieneBebe.Web.Tests/PreferenciasTests.cs`
 
 **Ponto de controle:** História 3 funciona sem quebrar as anteriores.
 
@@ -126,10 +126,10 @@
 
 ## Fase 6: História 4 — Confiar no dado exibido (P2)
 
-- [ ] T057 [P] [US4] Testes de `ObterSituacaoDasDrogariasHandler`: idade do dado, "n de 4" e falhas nomeadas — `tests/FraldasPromo.Application.Tests/Ofertas/SituacaoTests.cs`
-- [ ] T058 [US4] `ObterSituacaoDasDrogariasHandler` e consulta — `src/FraldasPromo.Application/Ofertas/Situacao/`
-- [ ] T059 [US4] Fragmento `_SituacaoDasLojas` e preço com condição em linha separada — `src/FraldasPromo.Web/Pages/Shared/`
-- [ ] T060 [P] [US4] Testes da Web: aviso de loja fora, idade acima de 30 h em destaque e condição separada — `tests/FraldasPromo.Web.Tests/SituacaoTests.cs`
+- [ ] T057 [P] [US4] Testes de `ObterSituacaoDasDrogariasHandler`: idade do dado, "n de 4" e falhas nomeadas — `tests/PromocoesHigieneBebe.Application.Tests/Ofertas/SituacaoTests.cs`
+- [ ] T058 [US4] `ObterSituacaoDasDrogariasHandler` e consulta — `src/PromocoesHigieneBebe.Application/Ofertas/Situacao/`
+- [ ] T059 [US4] Fragmento `_SituacaoDasLojas` e preço com condição em linha separada — `src/PromocoesHigieneBebe.Web/Pages/Shared/`
+- [ ] T060 [P] [US4] Testes da Web: aviso de loja fora, idade acima de 30 h em destaque e condição separada — `tests/PromocoesHigieneBebe.Web.Tests/SituacaoTests.cs`
 
 **Ponto de controle:** História 4 funciona sem quebrar as anteriores.
 
@@ -137,11 +137,11 @@
 
 ## Fase 7: História 5 — Acesso protegido (P3)
 
-- [ ] T061 [US5] ASP.NET Core Identity no schema `identidade`, cookie seguro, bloqueio após 5 tentativas e cadastro fechado — `src/FraldasPromo.Web/`
-- [ ] T062 [US5] Passkeys (.NET 10) e 2FA; páginas `Conta/Entrar` e `Conta/Passkeys` — `src/FraldasPromo.Web/Pages/Conta/`
-- [ ] T063 [US5] Comando para criar o usuário único, sem senha no repositório — `src/FraldasPromo.Web/Comandos/CriarUsuario.cs`
-- [ ] T064 [US5] Política de autorização global (`FallbackPolicy`) e limite de requisições no login — `src/FraldasPromo.Web/Program.cs`
-- [ ] T065 [P] [US5] Testes da Web: anônimo redirecionado, cadastro bloqueado, bloqueio de conta e limite de requisições — `tests/FraldasPromo.Web.Tests/AcessoTests.cs`
+- [ ] T061 [US5] ASP.NET Core Identity no schema `identidade`, cookie seguro, bloqueio após 5 tentativas e cadastro fechado — `src/PromocoesHigieneBebe.Web/`
+- [ ] T062 [US5] Passkeys (.NET 10) e 2FA; páginas `Conta/Entrar` e `Conta/Passkeys` — `src/PromocoesHigieneBebe.Web/Pages/Conta/`
+- [ ] T063 [US5] Comando para criar o usuário único, sem senha no repositório — `src/PromocoesHigieneBebe.Web/Comandos/CriarUsuario.cs`
+- [ ] T064 [US5] Política de autorização global (`FallbackPolicy`) e limite de requisições no login — `src/PromocoesHigieneBebe.Web/Program.cs`
+- [ ] T065 [P] [US5] Testes da Web: anônimo redirecionado, cadastro bloqueado, bloqueio de conta e limite de requisições — `tests/PromocoesHigieneBebe.Web.Tests/AcessoTests.cs`
 
 **Ponto de controle:** MVP publicável.
 
@@ -149,7 +149,7 @@
 
 ## Fase 8: Acabamento e deploy
 
-- [ ] T066 [P] Dockerfile da web com usuário não root — `src/FraldasPromo.Web/Dockerfile`
+- [ ] T066 [P] Dockerfile da web com usuário não root — `src/PromocoesHigieneBebe.Web/Dockerfile`
 - [ ] T067 Caddyfile com HTTPS e compose de produção com contas de banco separadas (script de criação de papéis) — `deploy/Caddyfile`, `deploy/docker-compose.yml`, `deploy/postgres/init.sql`
 - [ ] T068 [P] Revisar logs estruturados e garantir que nenhum contém dado pessoal — `src/**`
 - [ ] T069 [P] Dependabot e secret scanning — `.github/dependabot.yml`

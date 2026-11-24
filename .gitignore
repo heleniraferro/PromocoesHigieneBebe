@@ -1,0 +1,9 @@
+bin/
+obj/
+.vs/
+.idea/
+*.user
+TestResults/
+coverage*/
+.env
+deploy/.env
